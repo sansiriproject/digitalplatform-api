@@ -1,6 +1,6 @@
 # Activities
 
-## /activities
+## `activities#index`
 
 ```javascript
 const request = require("request-promise");
@@ -60,8 +60,6 @@ request(options)
         "activity_id": 30,
         "created_at": "2019-04-18T18:28:15.957Z",
         "updated_at": "2019-04-18T18:28:15.957Z",
-        "usage_type": "per_user",
-        "usage_volume": 500,
         "available_quota": 498,
         "activity_uid": "fLxeDNuLY6Z2"
       }
