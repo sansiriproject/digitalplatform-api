@@ -301,7 +301,19 @@
 
 <p>Digital Platform api use JWT to secure all it APIs. Please contact Sansiri for apiKey and apiSecret.</p>
 
-<p><code>CMSAuthToken: Bearer json.web.token</code></p>
+<p>With apiKey, generate JWT with this payload</p>
+
+<p><code>payload = { api_key: apiKey, exp: Time.now.to_i + 1.minute }</code></p>
+
+<p>With the payload above, sign it with JWT Secret.</p>
+
+<p><code>let token = jwt.sign(payload, apiSecret);</code></p>
+
+<p>Include token in every request header for each of your api call.</p>
+
+<p><code>CMSAuthToken: Bearer token</code></p>
+
+<p>There is an example on the right written in NodeJS using <code>request</code>, <code>request-promise</code>, and <code>jsonwebtoken</code> packages.</p>
 
 <aside class="notice">
 Make sure to replace <code>json.web.token</code> with JWT generated from <code>apiKey</code> and <code>`apiSecret`</code> with 1 minute expiry.
