@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,9 +211,6 @@
     <div class="toc-wrapper">
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
@@ -228,16 +225,25 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#activities" class="toc-h1 toc-link" data-title="Activities">Activities</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#activities-index" class="toc-h2 toc-link" data-title="activities#index"><code>activities#index</code></a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#activities-show" class="toc-h2 toc-link" data-title="activities#show">activities#show</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#activities-participants-index" class="toc-h2 toc-link" data-title="activities/participants#index">activities/participants#index</a>
+                  </li>
+                  <li>
+                    <a href="#activities-participants-create" class="toc-h2 toc-link" data-title="activities/participants#create">activities/participants#create</a>
+                  </li>
+                  <li>
+                    <a href="#activities-participants-attend" class="toc-h2 toc-link" data-title="activities/participants#attend">activities/participants#attend</a>
+                  </li>
+                  <li>
+                    <a href="#activities-participants-cancel" class="toc-h2 toc-link" data-title="activities/participants#cancel">activities/participants#cancel</a>
                   </li>
               </ul>
           </li>
@@ -246,199 +252,680 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li>Digital Platform</li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to digital platform. These are the topics you should read before using our APIs.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
+<ol>
+<li><a href="#authentication">Authorization / Authentication</a></li>
+</ol>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>To authorize, check this example:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"jsonwebtoken"</span><span class="p">);</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="kd">let</span> <span class="nx">apiKey</span> <span class="o">=</span> <span class="s2">"apiKey"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">apiSecret</span> <span class="o">=</span> <span class="s2">"apiSecret"</span><span class="p">;</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://digitalplatform-api.dev.sansiriproject.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">"/api/v1/client/${apiKey}/some/api/path"</span><span class="p">;</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">expTime</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">60</span><span class="p">;</span> <span class="c1">// expiration + 60 seconds</span>
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="na">api_key</span><span class="p">:</span> <span class="nx">apiKey</span><span class="p">,</span> <span class="na">exp</span><span class="p">:</span> <span class="nx">expTime</span> <span class="p">},</span> <span class="nx">apiSecret</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">CMSAuthToken</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Make sure to replace <code>apiKey</code> with your API key and <code>apiSecret</code> with your API Secret.</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Digital Platform api use JWT to secure all it APIs. Please contact Sansiri for apiKey and apiSecret.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
+<p><code>CMSAuthToken: Bearer json.web.token</code></p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+Make sure to replace <code>json.web.token</code> with JWT generated from <code>apiKey</code> and <code>`apiSecret`</code> with 1 minute expiry.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='activities'>Activities</h1><h2 id='activities-index'><code>activities#index</code></h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"jsonwebtoken"</span><span class="p">);</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="kd">let</span> <span class="nx">apiKey</span> <span class="o">=</span> <span class="s2">"apiKey"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">apiSecret</span> <span class="o">=</span> <span class="s2">"apiSecret"</span><span class="p">;</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://digitalplatform-api.dev.sansiriproject.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/api/v1/client/</span><span class="p">${</span><span class="nx">apiKey</span><span class="p">}</span><span class="s2">/activities`</span><span class="p">;</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<span class="kd">let</span> <span class="nx">expTime</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">60</span><span class="p">;</span> <span class="c1">// expiration + 60 seconds</span>
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="na">api_key</span><span class="p">:</span> <span class="nx">apiKey</span><span class="p">,</span> <span class="na">exp</span><span class="p">:</span> <span class="nx">expTime</span> <span class="p">},</span> <span class="nx">apiSecret</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">CMSAuthToken</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="s2">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"client_uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"171s_vNNF9yI"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fLxeDNuLY6Z2"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GARDEN PLANTING"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"shop_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"condition_detail"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANGKOK"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"running_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AT190030"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity_conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0_5eB6GXz3Wc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GARDEN - All Users"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"activity_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"start_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-03T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"end_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-30T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"activity_volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"activity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"available_quota"</span><span class="p">:</span><span class="w"> </span><span class="mi">498</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"activity_uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fLxeDNuLY6Z2"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"activity_volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity_available"</span><span class="p">:</span><span class="w"> </span><span class="mi">498</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint retrieves all activites.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<p><code>GET /api/v1/client/${apiKey}/activities</code></p>
+<h3 id='response'>Response</h3>
+<p><code>TYPE: Array</code></p>
+
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Default</th>
+<th>example</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>uid</td>
+<td>&quot;asdfuirtXX&quot;</td>
+<td>URL Safe Base64 String</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>name</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>shop_name</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>condition_detail</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>location</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>activity_volume</td>
+<td>100</td>
+<td>Total availability</td>
+</tr>
+<tr>
+<td>activity_available</td>
+<td>99</td>
+<td>space left</td>
+</tr>
+<tr>
+<td>running_number</td>
+<td>ATXXXXXX</td>
+<td>Activity Running number / code</td>
+</tr>
+<tr>
+<td>user_type</td>
+<td>all_user</td>
+<td>priority,family,employee,all_user</td>
 </tr>
 </tbody></table>
+<h2 id='activities-show'>activities#show</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"jsonwebtoken"</span><span class="p">);</span>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<span class="kd">let</span> <span class="nx">apiKey</span> <span class="o">=</span> <span class="s2">"apiKey"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">apiSecret</span> <span class="o">=</span> <span class="s2">"apiSecret"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">activityUid</span> <span class="o">=</span> <span class="s2">"sirnbiusASDIIH"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://digitalplatform-api.dev.sansiriproject.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/api/v1/client/</span><span class="p">${</span><span class="nx">apiKey</span><span class="p">}</span><span class="s2">/activities/</span><span class="p">${</span><span class="nx">activityUid</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">expTime</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">60</span><span class="p">;</span> <span class="c1">// expiration + 60 seconds</span>
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="na">api_key</span><span class="p">:</span> <span class="nx">apiKey</span><span class="p">,</span> <span class="na">exp</span><span class="p">:</span> <span class="nx">expTime</span> <span class="p">},</span> <span class="nx">apiSecret</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">CMSAuthToken</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"client_uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"171s_vNNF9yI"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fLxeDNuLY6Z2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GARDEN PLANTING"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"shop_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"condition_detail"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BANGKOK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"running_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AT190030"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"activity_conditions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0_5eB6GXz3Wc"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GARDEN - All Users"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activity_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-03T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-30T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activity_volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activity_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"available_quota"</span><span class="p">:</span><span class="w"> </span><span class="mi">498</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activity_uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fLxeDNuLY6Z2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"activity_volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"activity_available"</span><span class="p">:</span><span class="w"> </span><span class="mi">498</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves one activity from uid.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET /api/v1/client/${apiKey}/activities/${activityUid}</code></p>
+
+<aside class="notice">
+Remember — a happy api require `activityUid`.
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id='response'>Response</h3>
+<p><code>TYPE: Object</code></p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>example</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>uid</td>
+<td>&quot;asdfuirtXX&quot;</td>
+<td>URL Safe Base64 String</td>
+</tr>
+<tr>
+<td>name</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>shop_name</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>condition_detail</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>location</td>
+<td>&quot;&quot;</td>
+<td></td>
+</tr>
+<tr>
+<td>activity_volume</td>
+<td>100</td>
+<td>Total availability</td>
+</tr>
+<tr>
+<td>activity_available</td>
+<td>99</td>
+<td>space left</td>
+</tr>
+<tr>
+<td>running_number</td>
+<td>ATXXXXXX</td>
+<td>Activity Running number / code</td>
+</tr>
+<tr>
+<td>user_type</td>
+<td>all_user</td>
+<td>priority,family,employee,all_user</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='activities-participants-index'>activities/participants#index</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"jsonwebtoken"</span><span class="p">);</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="kd">let</span> <span class="nx">apiKey</span> <span class="o">=</span> <span class="s2">"apiKey"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">apiSecret</span> <span class="o">=</span> <span class="s2">"apiSecret"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">activityUid</span> <span class="o">=</span> <span class="s2">"sirnbiusASDIIH"</span><span class="p">;</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://digitalplatform-api.dev.sansiriproject.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/api/v1/client/</span><span class="p">${</span><span class="nx">apiKey</span><span class="p">}</span><span class="s2">/activities/</span><span class="p">${</span><span class="nx">activityUid</span><span class="p">}</span><span class="s2">/participants`</span><span class="p">;</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">expTime</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">60</span><span class="p">;</span> <span class="c1">// expiration + 60 seconds</span>
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="na">api_key</span><span class="p">:</span> <span class="nx">apiKey</span><span class="p">,</span> <span class="na">exp</span><span class="p">:</span> <span class="nx">expTime</span> <span class="p">},</span> <span class="nx">apiSecret</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">CMSAuthToken</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cPsF-wBftDcs"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ชอร์ตง ฮอง นายโฮยิน ฮอง"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attending"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-23T03:20:44.388Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-23T03:20:44.388Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attended_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity_condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0_5eB6GXz3Wc"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GARDEN - All Users"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activity_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-03T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-30T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"activity_volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all participants from activity.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET /api/v1/client/${apiKey}/activities/${activityUid}/participants</code></p>
+<h3 id='response'>Response</h3>
+<p><code>TYPE: Array</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uid</td>
+<td>&quot;cPsF-wBftDcs&quot;</td>
+<td>URL Safe Base64 String</td>
+</tr>
+<tr>
+<td>status</td>
+<td>&quot;attending&quot;</td>
+<td>attending,attended,canceled</td>
+</tr>
+<tr>
+<td>attended_datetime</td>
+<td></td>
+<td>time stamp when attendance is checked</td>
+</tr>
+</tbody></table>
+<h2 id='activities-participants-create'>activities/participants#create</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"jsonwebtoken"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">apiKey</span> <span class="o">=</span> <span class="s2">"apiKey"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">apiSecret</span> <span class="o">=</span> <span class="s2">"apiSecret"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">activityUid</span> <span class="o">=</span> <span class="s2">"sirnbiusASDIIH"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://digitalplatform-api.dev.sansiriproject.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/api/v1/client/</span><span class="p">${</span><span class="nx">apiKey</span><span class="p">}</span><span class="s2">/activities/</span><span class="p">${</span><span class="nx">activityUid</span><span class="p">}</span><span class="s2">/participants`</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">expTime</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">60</span><span class="p">;</span> <span class="c1">// expiration + 60 seconds</span>
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="na">api_key</span><span class="p">:</span> <span class="nx">apiKey</span><span class="p">,</span> <span class="na">exp</span><span class="p">:</span> <span class="nx">expTime</span> <span class="p">},</span> <span class="nx">apiSecret</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">CMSAuthToken</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
+  <span class="p">},</span>
+  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">member_firebase_uid</span><span class="p">:</span> <span class="s2">"ivnfitklsispp"</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+  </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cPsF-wBftDcs"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ชอร์ตง ฮอง นายโฮยิน ฮอง"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attending"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-23T03:20:44.388Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-23T03:20:44.388Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"attended_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"activity_condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0_5eB6GXz3Wc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GARDEN - All Users"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-03T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"end_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-30T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity_volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<p>This endpoint create participant for activityUid.
+Please note that <code>member_firebase_uid</code> is from HSA Single Sign On</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>POST /api/v1/client/${apiKey}/activities/${activityUid}/participants</code></p>
+<h3 id='request-body'>Request Body</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>example</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>member_firebase_uid</td>
+<td>&quot;1aae11f119d28015e342&quot;</td>
+<td>Firebase UID from HSA Single Sign On</td>
+</tr>
+</tbody></table>
+<h3 id='response'>Response</h3>
+<p><code>TYPE: Object</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uid</td>
+<td>&quot;cPsF-wBftDcs&quot;</td>
+<td>URL Safe Base64 String</td>
+</tr>
+<tr>
+<td>status</td>
+<td>&quot;attending&quot;</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='activities-participants-attend'>activities/participants#attend</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"jsonwebtoken"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">apiKey</span> <span class="o">=</span> <span class="s2">"apiKey"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">apiSecret</span> <span class="o">=</span> <span class="s2">"apiSecret"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">activityUid</span> <span class="o">=</span> <span class="s2">"sirnbiusASDIIH"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">participantUid</span> <span class="o">=</span> <span class="s2">"cPsF-wBftDcs"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://digitalplatform-api.dev.sansiriproject.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/api/v1/client/</span><span class="p">${</span><span class="nx">apiKey</span><span class="p">}</span><span class="s2">/activities/</span><span class="p">${</span><span class="nx">activityUid</span><span class="p">}</span><span class="s2">/participants/</span><span class="p">${</span><span class="nx">participantUid</span><span class="p">}</span><span class="s2">/attend`</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">expTime</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">60</span><span class="p">;</span> <span class="c1">// expiration + 60 seconds</span>
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="na">api_key</span><span class="p">:</span> <span class="nx">apiKey</span><span class="p">,</span> <span class="na">exp</span><span class="p">:</span> <span class="nx">expTime</span> <span class="p">},</span> <span class="nx">apiSecret</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s2">"PATCH"</span><span class="p">,</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">CMSAuthToken</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cPsF-wBftDcs"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ชอร์ตง ฮอง นายโฮยิน ฮอง"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attended"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-23T03:20:44.388Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-23T03:20:44.388Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"attended_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"activity_condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0_5eB6GXz3Wc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GARDEN - All Users"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-03T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"end_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-30T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity_volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint update participant <code>participantUid</code> status to <code>attended</code>.</p>
+
+<blockquote>
+<p>Only <code>attending</code> can be transitioned to <code>attended</code>. <code>canceled</code> cannot be toggle to attended to prevent over capacity booking.</p>
+</blockquote>
+
+<p>API validates that <code>participantUid</code> belongs to <code>activityUid</code>.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>PATCH /api/v1/client/${apiKey}/activities/${activityUid}/participants/${participantUid}/attend</code></p>
+<h3 id='response'>Response</h3>
+<p><code>TYPE: Object</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uid</td>
+<td>&quot;cPsF-wBftDcs&quot;</td>
+<td>URL Safe Base64 String</td>
+</tr>
+<tr>
+<td>status</td>
+<td>&quot;attended&quot;</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='activities-participants-cancel'>activities/participants#cancel</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+<span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"jsonwebtoken"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">apiKey</span> <span class="o">=</span> <span class="s2">"apiKey"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">apiSecret</span> <span class="o">=</span> <span class="s2">"apiSecret"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">activityUid</span> <span class="o">=</span> <span class="s2">"sirnbiusASDIIH"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">participantUid</span> <span class="o">=</span> <span class="s2">"cPsF-wBftDcs"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://digitalplatform-api.dev.sansiriproject.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/api/v1/client/</span><span class="p">${</span><span class="nx">apiKey</span><span class="p">}</span><span class="s2">/activities/</span><span class="p">${</span><span class="nx">activityUid</span><span class="p">}</span><span class="s2">/participants/</span><span class="p">${</span><span class="nx">participantUid</span><span class="p">}</span><span class="s2">/cancel`</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">expTime</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">60</span><span class="p">;</span> <span class="c1">// expiration + 60 seconds</span>
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">jwt</span><span class="p">.</span><span class="nx">sign</span><span class="p">({</span> <span class="na">api_key</span><span class="p">:</span> <span class="nx">apiKey</span><span class="p">,</span> <span class="na">exp</span><span class="p">:</span> <span class="nx">expTime</span> <span class="p">},</span> <span class="nx">apiSecret</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s2">"PATCH"</span><span class="p">,</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">headers</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">CMSAuthToken</span><span class="p">:</span> <span class="s2">`Bearer </span><span class="p">${</span><span class="nx">token</span><span class="p">}</span><span class="s2">`</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cPsF-wBftDcs"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ชอร์ตง ฮอง นายโฮยิน ฮอง"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"canceled"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-23T03:20:44.388Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-23T03:20:44.388Z"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"attended_datetime"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"activity_condition"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0_5eB6GXz3Wc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GARDEN - All Users"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-03T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"end_datetime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-05-30T18:28:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"activity_volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"all_user"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2019-04-18T18:28:15.957Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint update participant <code>participantUid</code> status to <code>canceled</code>.</p>
+
+<blockquote>
+<p>Only <code>attending</code> or <code>attended</code> can be transitioned to <code>canceled</code></p>
+</blockquote>
+
+<p>API validates that <code>participantUid</code> belongs to <code>activityUid</code>.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>PATCH /api/v1/client/${apiKey}/activities/${activityUid}/participants/${participantUid}/cancel</code></p>
+<h3 id='response'>Response</h3>
+<p><code>TYPE: Object</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>uid</td>
+<td>&quot;cPsF-wBftDcs&quot;</td>
+<td>URL Safe Base64 String</td>
+</tr>
+<tr>
+<td>status</td>
+<td>&quot;canceled&quot;</td>
+<td></td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
 <table><thead>
 <tr>
 <th>Error Code</th>
@@ -494,9 +981,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
