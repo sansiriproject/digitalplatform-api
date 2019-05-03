@@ -1,6 +1,6 @@
 # Activities
 
-## Get All Activities
+## /activities
 
 ```javascript
 const request = require("request-promise");
@@ -72,7 +72,7 @@ request(options)
 ]
 ```
 
-This endpoint retrieves all kittens.
+This endpoint retrieves all activites.
 
 ### HTTP Request
 

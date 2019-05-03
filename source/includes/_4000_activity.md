@@ -1,4 +1,4 @@
-## Get one Activity form UID
+## /activities/:activityUid
 
 ```javascript
 const request = require("request-promise");
@@ -69,13 +69,13 @@ request(options)
 }
 ```
 
-This endpoint retrieves all kittens.
+This endpoint retrieves one activity from uid.
 
 ### HTTP Request
 
 `GET /api/v1/client/${apiKey}/activities/${activityUid}`
 
-<aside class="success">
+<aside class="notice">
 Remember — a happy api require `activityUid`.
 </aside>
 
