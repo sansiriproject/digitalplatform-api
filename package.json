@@ -1,0 +1,27 @@
+{
+  "name": "digitalplatform-api",
+  "version": "1.0.0",
+  "description": "<p align=\"center\">   <img src=\"https://raw.githubusercontent.com/lord/img/master/logo-slate.png\" alt=\"Slate: API Documentation Generator\" width=\"226\">   <br>   <a href=\"https://travis-ci.org/lord/slate\"><img src=\"https://travis-ci.org/lord/slate.svg?branch=master\" alt=\"Build Status\"></a> </p>",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sansiriproject/digitalplatform-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sansiriproject/digitalplatform-api/issues"
+  },
+  "homepage": "https://github.com/sansiriproject/digitalplatform-api#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
