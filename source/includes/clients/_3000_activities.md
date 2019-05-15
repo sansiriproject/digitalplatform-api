@@ -1,6 +1,4 @@
-# Activities
-
-## `activities#index`
+## activities#index
 
 ```javascript
 const request = require("request-promise");
@@ -72,11 +70,11 @@ request(options)
 
 This endpoint retrieves all activites.
 
-### HTTP Request
+#### HTTP Request
 
 `GET /api/v1/client/${apiKey}/activities`
 
-### Response
+#### Response
 
 `TYPE: Array`
 
