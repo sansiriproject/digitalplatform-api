@@ -219,16 +219,16 @@
         <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#activities" class="toc-h1 toc-link" data-title="Activities">Activities</a>
+            <a href="#clients-apis" class="toc-h1 toc-link" data-title="Clients APIs">Clients APIs</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#activities-index" class="toc-h2 toc-link" data-title="activities#index"><code>activities#index</code></a>
+                    <a href="#client-apis-introductions" class="toc-h2 toc-link" data-title="Client APIs Introductions">Client APIs Introductions</a>
+                  </li>
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#activities-index" class="toc-h2 toc-link" data-title="activities#index">activities#index</a>
                   </li>
                   <li>
                     <a href="#activities-show" class="toc-h2 toc-link" data-title="activities#show">activities#show</a>
@@ -245,10 +245,33 @@
                   <li>
                     <a href="#activities-participants-cancel" class="toc-h2 toc-link" data-title="activities/participants#cancel">activities/participants#cancel</a>
                   </li>
+                  <li>
+                    <a href="#errors" class="toc-h2 toc-link" data-title="Errors">Errors</a>
+                  </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#partner-apis" class="toc-h1 toc-link" data-title="Partner APIs">Partner APIs</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#partner-apis-introductions" class="toc-h2 toc-link" data-title="Partner APIs Introductions">Partner APIs Introductions</a>
+                  </li>
+                  <li>
+                    <a href="#1-redirecting-to-partner-site" class="toc-h2 toc-link" data-title="1. Redirecting to partner site">1. Redirecting to partner site</a>
+                  </li>
+                  <li>
+                    <a href="#2-1-get-appointment-data" class="toc-h2 toc-link" data-title="2.1 Get Appointment Data">2.1 Get Appointment Data</a>
+                  </li>
+                  <li>
+                    <a href="#2-2-complete-or-confirm-appointment" class="toc-h2 toc-link" data-title="2.2 Complete or Confirm Appointment">2.2 Complete or Confirm Appointment</a>
+                  </li>
+                  <li>
+                    <a href="#2-3-cancel-appointment" class="toc-h2 toc-link" data-title="2.3 Cancel Appointment">2.3 Cancel Appointment</a>
+                  </li>
+                  <li>
+                    <a href="#2-4-update-appointment" class="toc-h2 toc-link" data-title="2.4 Update Appointment">2.4 Update Appointment</a>
+                  </li>
+              </ul>
           </li>
       </ul>
         <ul class="toc-footer">
@@ -258,13 +281,11 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
-<p>Welcome to digital platform. These are the topics you should read before using our APIs.</p>
+        <h1 id='clients-apis'>Clients APIs</h1><h2 id='client-apis-introductions'>Client APIs Introductions</h2>
+<p>Welcome to digital platform. In this section, you should see how to implement API calls via <code>Clients APIs</code>.</p>
 
-<ol>
-<li><a href="#authentication">Authorization / Authentication</a></li>
-</ol>
-<h1 id='authentication'>Authentication</h1>
+<p>Please read <a href="#authentication">Authentication</a> section before proceeding.</p>
+<h2 id='authentication'>Authentication</h2>
 <blockquote>
 <p>To authorize, check this example:</p>
 </blockquote>
@@ -318,7 +339,7 @@
 <aside class="notice">
 Make sure to replace <code>json.web.token</code> with JWT generated from <code>apiKey</code> and <code>`apiSecret`</code> with 1 minute expiry.
 </aside>
-<h1 id='activities'>Activities</h1><h2 id='activities-index'><code>activities#index</code></h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+<h2 id='activities-index'>activities#index</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
 <span class="kr">const</span> <span class="nx">jwt</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"jsonwebtoken"</span><span class="p">);</span>
 
 <span class="kd">let</span> <span class="nx">apiKey</span> <span class="o">=</span> <span class="s2">"apiKey"</span><span class="p">;</span>
@@ -384,9 +405,9 @@ Make sure to replace <code>json.web.token</code> with JWT generated from <code>a
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves all activites.</p>
-<h3 id='http-request'>HTTP Request</h3>
+<h4 id='http-request'>HTTP Request</h4>
 <p><code>GET /api/v1/client/${apiKey}/activities</code></p>
-<h3 id='response'>Response</h3>
+<h4 id='response'>Response</h4>
 <p><code>TYPE: Array</code></p>
 
 <table><thead>
@@ -937,7 +958,7 @@ Please note that <code>member_firebase_uid</code> is from HSA Single Sign On</p>
 <td></td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
+<h2 id='errors'>Errors</h2>
 <table><thead>
 <tr>
 <th>Error Code</th>
@@ -987,6 +1008,937 @@ Please note that <code>member_firebase_uid</code> is from HSA Single Sign On</p>
 <tr>
 <td>503</td>
 <td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+<h1 id='partner-apis'>Partner APIs</h1><h2 id='partner-apis-introductions'>Partner APIs Introductions</h2>
+<p>Welcome to digital platform. In this section, you should see how to implement API calls via <code>Partner APIs</code>.</p>
+
+<p>Please first read the section <a href="#1-redirecting-to-partner-site">1. Redirecting to partner site</a>. We required all partner to send us these information.</p>
+
+<p>Hostname name available are</p>
+
+<ol>
+<li>Staging Server <code>https://family.stg.sansiriproject.com</code></li>
+<li>Production Server <code>https://family.sansiri.com</code></li>
+</ol>
+<h2 id='1-redirecting-to-partner-site'>1. Redirecting to partner site</h2>
+<p>This section is <code>Sansiri Family</code> redirecting to <code>Partner Site</code>. We require <code>Partner URL</code> for us to redirect via <code>GET</code> or send data via <code>POST</code>.</p>
+
+<ol>
+<li>For example, our partners are required to send us either on of these information.
+
+<ol>
+<li>Partner A using <code>GET</code>
+
+<ol>
+<li>Method: <code>GET</code></li>
+<li>URL: <code>https://www.partner-A.com/sansiri-family</code></li>
+</ol></li>
+<li>Partner B using <code>POST</code>
+
+<ol>
+<li>Method: <code>POST</code></li>
+<li>URL: <code>https://www.partner-B.com/sansiri-family</code></li>
+</ol></li>
+</ol></li>
+</ol>
+<h3 id='sansiri-family-to-partner'>Sansiri family to Partner</h3>
+<p>Once we configured our system to be able to send data to partner site. Please follow the guideline below to integrate the two systems.</p>
+
+<ol>
+<li>Each request will be sent through a form, using either GET or POST method, as chosen by the service provider.</li>
+<li>Each request will always have &quot;Primary Parameter&quot;.</li>
+<li>Only &quot;POST&quot; request will include the detailed information</li>
+<li>Unless opt-out, each request can contain the user profile.</li>
+<li>Unless opt-out, each request can contain an &quot;ORIGIN ADDRESS&quot;, &quot;DESTINATION ADDRESS&quot;, or both, depends on the nature of the provided service itself</li>
+<li>Custom parameters can also be included on the basis of each service provider</li>
+<li>All of the information can also be retrieve via &quot;Get an appointment&quot; using the provided access_token later</li>
+</ol>
+<h3 id='via-get'>VIA GET</h3>
+<p><code>GET https://www.partner-A.com/sansiri-family</code></p>
+
+<p>Primary Parameter <code>in Query String</code></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>a unique string represent specific service appointment record at Sansiri&#39;s. This will be used for updating the reservation status later on.</td>
+</tr>
+<tr>
+<td>access_token</td>
+<td>string</td>
+<td>a unique string, short lived access token, generated for each request sent to the partner site. The partner system should use this access token to verified the validity of the request, by sending the access token back to Sansiri via the &quot;Get Appointment&quot; api</td>
+</tr>
+<tr>
+<td>access_token_expired_at</td>
+<td>string</td>
+<td>the date / time which the access token will be expired</td>
+</tr>
+<tr>
+<td>access_token_expired_seconds</td>
+<td>number</td>
+<td>the number of seconds before the access token would be expired</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>string</td>
+<td>a unique string represent a certain user / member at Sansiri&#39;s. This will always be the same for each user.</td>
+</tr>
+<tr>
+<td>lang</td>
+<td>string</td>
+<td>the locale which the user was using</td>
+</tr>
+<tr>
+<td>return_url</td>
+<td>string</td>
+<td>the url which the user should be redirected to if the appointment could be considered as SUCCESS at the partner site</td>
+</tr>
+<tr>
+<td>error_url</td>
+<td>string</td>
+<td>the url which the user should be redirected to if the appointment could be considered as ERROR or CANCELLED at the partner site</td>
+</tr>
+</tbody></table>
+<h3 id='via-post'>VIA POST</h3>
+<p><code>POST https://www.partner-B.com/sansiri-family</code></p>
+<h3 id='primary-parameter-in-request-body'>Primary Parameter <code>in Request BODY</code></h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>a unique string represent specific service appointment record at Sansiri&#39;s. This will be used for updating the reservation status later on.</td>
+</tr>
+<tr>
+<td>access_token</td>
+<td>string</td>
+<td>a unique string, short lived access token, generated for each request sent to the partner site. The partner system should use this access token to verified the validity of the request, by sending the access token back to Sansiri via the &quot;Get Appointment&quot; api</td>
+</tr>
+<tr>
+<td>access_token_expired_at</td>
+<td>string</td>
+<td>the date / time which the access token will be expired</td>
+</tr>
+<tr>
+<td>access_token_expired_seconds</td>
+<td>number</td>
+<td>the number of seconds before the access token would be expired</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>string</td>
+<td>a unique string represent a certain user / member at Sansiri&#39;s. This will always be the same for each user.</td>
+</tr>
+<tr>
+<td>lang</td>
+<td>string</td>
+<td>the locale which the user was using</td>
+</tr>
+<tr>
+<td>return_url</td>
+<td>string</td>
+<td>the url which the user should be redirected to if the appointment could be considered as SUCCESS at the partner site</td>
+</tr>
+<tr>
+<td>error_url</td>
+<td>string</td>
+<td>the url which the user should be redirected to if the appointment could be considered as ERROR or CANCELLED at the partner site</td>
+</tr>
+</tbody></table>
+<h3 id='member-info-only-if-available'>Member info only if available</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td>string</td>
+<td>the user first name</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>string</td>
+<td>the user last name</td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>string</td>
+<td>the user phone number</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>the user email</td>
+</tr>
+<tr>
+<td>project_id</td>
+<td>string</td>
+<td>related project id of the consumer address</td>
+</tr>
+<tr>
+<td>project_name</td>
+<td>string</td>
+<td>related project name the consumer address</td>
+</tr>
+<tr>
+<td>model_code</td>
+<td>string</td>
+<td>related model code of the consumer address</td>
+</tr>
+<tr>
+<td>model_id</td>
+<td>string</td>
+<td>related model id of the consumer address</td>
+</tr>
+<tr>
+<td>model_name</td>
+<td>string</td>
+<td>related model name of the consumer address</td>
+</tr>
+</tbody></table>
+<h3 id='origin-address-if-available'>Origin Address if available</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>origin_address</td>
+<td>string</td>
+<td>the full text of the origin address</td>
+</tr>
+<tr>
+<td>origin_address_1</td>
+<td>string</td>
+<td>the address 1 text of the origin address</td>
+</tr>
+<tr>
+<td>origin_address_2</td>
+<td>string</td>
+<td>the address 2 text of the origin address</td>
+</tr>
+<tr>
+<td>origin_address_street</td>
+<td>string</td>
+<td>the street address of the origin address</td>
+</tr>
+<tr>
+<td>origin_address_district</td>
+<td>string</td>
+<td>the district name of the origin address</td>
+</tr>
+<tr>
+<td>origin_address_subdistrict</td>
+<td>string</td>
+<td>the subdistrict name of the origin address</td>
+</tr>
+<tr>
+<td>origin_address_province</td>
+<td>string</td>
+<td>the province name of the origin address</td>
+</tr>
+<tr>
+<td>origin_address_postal_code</td>
+<td>string</td>
+<td>the postal code of the origin address</td>
+</tr>
+</tbody></table>
+<h3 id='destination-address-if-available'>Destination Address if available</h3>
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>destination_address</td>
+<td>string</td>
+<td>the full text of the destination address</td>
+</tr>
+<tr>
+<td>destination_address_1</td>
+<td>string</td>
+<td>the address 1 text of the destination address</td>
+</tr>
+<tr>
+<td>destination_address_2</td>
+<td>string</td>
+<td>the address 2 text of the destination address</td>
+</tr>
+<tr>
+<td>destination_address_street</td>
+<td>string</td>
+<td>the street address of the destination address</td>
+</tr>
+<tr>
+<td>destination_address_district</td>
+<td>string</td>
+<td>the district name of the destination address</td>
+</tr>
+<tr>
+<td>destination_address_subdistrict</td>
+<td>string</td>
+<td>the subdistrict name of the destination address</td>
+</tr>
+<tr>
+<td>destination_address_province</td>
+<td>string</td>
+<td>the province name of the destination address</td>
+</tr>
+<tr>
+<td>destination_address_postal_code</td>
+<td>string</td>
+<td>the postal code of the destination address</td>
+</tr>
+</tbody></table>
+<h2 id='2-1-get-appointment-data'>2.1 Get Appointment Data</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">access_token</span> <span class="o">=</span> <span class="s2">"access_token_from_previous_section"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://family.sansiri.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/family/api/booking/appointment?access_token=</span><span class="p">${</span><span class="nx">access_token</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre>
+<p>Example Response</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"uuid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uuid"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_name"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last_name"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"phone_number"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"project_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_id"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"project_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_name"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"model_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"model_code"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"model_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"model_id"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"model_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"model_name"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"origin_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"origin_address"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"origin_address_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"origin_address_1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"origin_address_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"origin_address_2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"origin_address_district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"origin_address_district"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"origin_address_sub_district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"origin_address_sub_district"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"origin_address_province"</span><span class="p">:</span><span class="w"> </span><span class="s2">"origin_address_province"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"origin_address_postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"origin_address_postal_code"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"destination_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_address"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"destination_address_1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_address_1"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"destination_address_2"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_address_2"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"destination_address_district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_address_district"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"destination_address_sub_district"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_address_sub_district"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"destination_address_province"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_address_province"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"destination_address_postal_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"destination_address_postal_code"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"return_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"return_url"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"error_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"error_url"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"update_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"update_url"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"address"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amphor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amphor"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"postCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"postCode"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">"province"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tambol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tambol"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"code"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"model"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"code"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"project"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"amphor"</span><span class="p">:</span><span class="w"> </span><span class="s2">"amphor"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"nameEn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nameEn"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"code"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">"province"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"segment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"segment"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"street"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"tambol"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tambol"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"product"</span><span class="p">:</span><span class="w"> </span><span class="s2">"product"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"project_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_name"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"project_name_en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"project_name_en"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"room_no"</span><span class="p">:</span><span class="w"> </span><span class="s2">"room_no"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"usageArea"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usageArea"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>With this API, our Partner can fetrch the information of a given appointment, using <code>access_token</code> provided by Sansiri (please refer to this section <a href="#1-redirecting-to-partner-site">1. Redirecting to partner site</a>).</p>
+
+<p><code>GET https://family.sansiri.com/family/api/booking/appointment</code></p>
+
+<p>Parameter <code>in Query String</code></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>string</td>
+<td>Access token from <a href="#1-redirecting-to-partner-site">1. Redirecting to partner site</a></td>
+</tr>
+</tbody></table>
+
+<p>Response, Please see data structure on the right for clearer picture.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>data</td>
+<td>object</td>
+<td>the response data</td>
+</tr>
+<tr>
+<td>-uuid</td>
+<td>string</td>
+<td>the user uuid</td>
+</tr>
+<tr>
+<td>-first_name</td>
+<td>string</td>
+<td>the user first_name</td>
+</tr>
+<tr>
+<td>-last_name</td>
+<td>string</td>
+<td>the user last_name</td>
+</tr>
+<tr>
+<td>-phone_number</td>
+<td>string</td>
+<td>the user phone number</td>
+</tr>
+<tr>
+<td>-project_id</td>
+<td>string</td>
+<td>the project id of the chosen address</td>
+</tr>
+<tr>
+<td>-project_name</td>
+<td>string</td>
+<td>the project name of the chosen address</td>
+</tr>
+<tr>
+<td>-model_code</td>
+<td>string</td>
+<td>the code of the unit type of chosen address</td>
+</tr>
+<tr>
+<td>-model_id</td>
+<td>string</td>
+<td>the id of the unit type of chosen address</td>
+</tr>
+<tr>
+<td>-model_name</td>
+<td>string</td>
+<td>the name of the unit type of chosen address</td>
+</tr>
+<tr>
+<td>-origin_address</td>
+<td>string</td>
+<td>the full address of the origin address</td>
+</tr>
+<tr>
+<td>-origin_address_1</td>
+<td>string</td>
+<td>the main address of the origin address</td>
+</tr>
+<tr>
+<td>-origin_address_2</td>
+<td>string</td>
+<td>the sub address of the origin address</td>
+</tr>
+<tr>
+<td>-origin_address_district</td>
+<td>string</td>
+<td>the district name of the origin address</td>
+</tr>
+<tr>
+<td>-origin_address_sub_district</td>
+<td>string</td>
+<td>the sub district name of the origin address</td>
+</tr>
+<tr>
+<td>-origin_address_province</td>
+<td>string</td>
+<td>the province name of the origin address</td>
+</tr>
+<tr>
+<td>-origin_address_postal_code</td>
+<td>string</td>
+<td>the postal code of the origin address</td>
+</tr>
+<tr>
+<td>-destination_address</td>
+<td>string</td>
+<td>the full address of the destination address</td>
+</tr>
+<tr>
+<td>-destination_address_1</td>
+<td>string</td>
+<td>the main address of the destination address</td>
+</tr>
+<tr>
+<td>-destination_address_2</td>
+<td>string</td>
+<td>the sub address of the destination address</td>
+</tr>
+<tr>
+<td>-destination_address_district</td>
+<td>string</td>
+<td>the district name of the destination address</td>
+</tr>
+<tr>
+<td>-destination_address_sub_district</td>
+<td>string</td>
+<td>the sub district name of the destination address</td>
+</tr>
+<tr>
+<td>-destination_address_province</td>
+<td>string</td>
+<td>the province name of the destination address</td>
+</tr>
+<tr>
+<td>-destination_address_postal_code</td>
+<td>string</td>
+<td>the postal code of the destination address</td>
+</tr>
+<tr>
+<td>-return_url</td>
+<td>string</td>
+<td>the url which the service should post the information to, when the order is completed</td>
+</tr>
+<tr>
+<td>-error_url</td>
+<td>string</td>
+<td>the url which the service should post the information to, when the order is canceled</td>
+</tr>
+<tr>
+<td>-update_url</td>
+<td>string</td>
+<td>the url which the service could post the information to update the order</td>
+</tr>
+<tr>
+<td>-addresses</td>
+<td>array</td>
+<td>list of addresses available for the user</td>
+</tr>
+<tr>
+<td>--address</td>
+<td>string</td>
+<td>the address text</td>
+</tr>
+<tr>
+<td>--address_data</td>
+<td>object</td>
+<td>the address information separated by type</td>
+</tr>
+<tr>
+<td>---amphor</td>
+<td>string</td>
+<td>the district name</td>
+</tr>
+<tr>
+<td>---postCode</td>
+<td>string</td>
+<td>the postal code</td>
+</tr>
+<tr>
+<td>---province</td>
+<td>string</td>
+<td>the province name</td>
+</tr>
+<tr>
+<td>---street</td>
+<td>string</td>
+<td>the street name</td>
+</tr>
+<tr>
+<td>---tambol</td>
+<td>string</td>
+<td>the subdistrict name</td>
+</tr>
+<tr>
+<td>--code</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>--model</td>
+<td>object</td>
+<td>the unit type of the address</td>
+</tr>
+<tr>
+<td>---code</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>---id</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>---name</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>--project</td>
+<td>object</td>
+<td>the project which the address belongs to</td>
+</tr>
+<tr>
+<td>---amphor</td>
+<td>string</td>
+<td>the district name of the project</td>
+</tr>
+<tr>
+<td>---id</td>
+<td>string</td>
+<td>the project id</td>
+</tr>
+<tr>
+<td>---name</td>
+<td>string</td>
+<td>the TH name of the project</td>
+</tr>
+<tr>
+<td>---nameEn</td>
+<td>string</td>
+<td>the EN name of the project</td>
+</tr>
+<tr>
+<td>---code</td>
+<td>string</td>
+<td>the zip code of the project</td>
+</tr>
+<tr>
+<td>---province</td>
+<td>string</td>
+<td>the province name of the project</td>
+</tr>
+<tr>
+<td>---segment</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>---street</td>
+<td>string</td>
+<td>the street name of the project</td>
+</tr>
+<tr>
+<td>---tambol</td>
+<td>string</td>
+<td>the sub district name of the project</td>
+</tr>
+<tr>
+<td>---product</td>
+<td>object</td>
+<td>the type of the project</td>
+</tr>
+<tr>
+<td>----id</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>----name</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>--project_name</td>
+<td>string</td>
+<td>the TH name of the project</td>
+</tr>
+<tr>
+<td>--project_name_en</td>
+<td>string</td>
+<td>the EN name of the project</td>
+</tr>
+<tr>
+<td>--room_no</td>
+<td>string</td>
+<td>the room number of the address</td>
+</tr>
+<tr>
+<td>--usageArea</td>
+<td>string</td>
+<td>the size of the address in square metres</td>
+</tr>
+<tr>
+<td>-success</td>
+<td>number</td>
+<td>Allowed values: 0, 1</td>
+</tr>
+<tr>
+<td>-message</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id='2-2-complete-or-confirm-appointment'>2.2 Complete or Confirm Appointment</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="s2">"token_from_previous_section"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">locale</span> <span class="o">=</span> <span class="s2">"en"</span><span class="p">;</span> <span class="c1">// en, th, zh</span>
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://family.sansiri.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/family/</span><span class="p">${</span><span class="nx">locale</span><span class="p">}</span><span class="s2">/service/booking/confirm/success`</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">token</span><span class="p">:</span> <span class="nx">token</span><span class="p">,</span>
+    <span class="na">status</span><span class="p">:</span> <span class="s2">"COMPLETED"</span><span class="p">,</span>
+    <span class="na">message</span><span class="p">:</span> <span class="s2">"customer has made payment"</span><span class="p">,</span>
+    <span class="na">order_id</span><span class="p">:</span> <span class="s2">"partner-a-20190511-001"</span><span class="p">,</span>
+    <span class="na">order_date</span><span class="p">:</span> <span class="s2">"2019-05-11T18:28:00.000Z"</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">foo</span><span class="p">:</span> <span class="s2">"far"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"current_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this api to set appointment to completed or confirmed. This will tell Sansiri that the specific request has been completed on Partner system.</p>
+
+<p><code>POST https://family.sansiri.com/family/{locale}/service/booking/confirm/success</code></p>
+
+<p>Parameter <code>in POST BODY</code></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>a unique string represent specific service appointment record at Sansiri&#39;s.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>the current of the transaction at service provider site. Allowed values: COMPLETED, CONFIRMED</td>
+</tr>
+<tr>
+<td>message optional</td>
+<td>string</td>
+<td>any string the service provider would like to be store at Sansiri&#39;s</td>
+</tr>
+<tr>
+<td>order_id optional</td>
+<td>string</td>
+<td>the transaction id / order represent the transaction / order at service provider site</td>
+</tr>
+<tr>
+<td>order_date optional</td>
+<td>string</td>
+<td>the date/time when the order has occurred (ISO8601 format)</td>
+</tr>
+<tr>
+<td>data optional</td>
+<td>string</td>
+<td>a json string / object containing any other information not belongs to any other fields</td>
+</tr>
+</tbody></table>
+<h2 id='2-3-cancel-appointment'>2.3 Cancel Appointment</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="s2">"token_from_previous_section"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">locale</span> <span class="o">=</span> <span class="s2">"en"</span><span class="p">;</span> <span class="c1">// en, th, zh</span>
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://family.sansiri.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/family/{locale}/service/booking/confirm/error`</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">token</span><span class="p">:</span> <span class="nx">token</span><span class="p">,</span>
+    <span class="na">message</span><span class="p">:</span> <span class="s2">"customer lost interest"</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">foo</span><span class="p">:</span> <span class="s2">"far"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"current_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELLED"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this api to set appointment to cancelled. This will tell Sansiri that the specific request has been cancelled or unfulfilled on Partner system.</p>
+
+<p><code>POST https://family.sansiri.com/family/{locale}/service/booking/confirm/error</code></p>
+
+<p>Parameter <code>in POST BODY</code></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>a unique string represent specific service appointment record at Sansiri&#39;s.</td>
+</tr>
+<tr>
+<td>message optional</td>
+<td>string</td>
+<td>any string the service provider would like to be store at Sansiri&#39;s</td>
+</tr>
+<tr>
+<td>data optional</td>
+<td>string</td>
+<td>a json string / object containing any other information not belongs to any other fields</td>
+</tr>
+</tbody></table>
+<h2 id='2-4-update-appointment'>2.4 Update Appointment</h2><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"request-promise"</span><span class="p">);</span>
+
+<span class="kd">let</span> <span class="nx">token</span> <span class="o">=</span> <span class="s2">"token_from_previous_section"</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">locale</span> <span class="o">=</span> <span class="s2">"en"</span><span class="p">;</span> <span class="c1">// en, th, zh</span>
+<span class="kr">const</span> <span class="nx">hostname</span> <span class="o">=</span> <span class="s2">"https://family.sansiri.com"</span><span class="p">;</span>
+<span class="kr">const</span> <span class="nx">apiPath</span> <span class="o">=</span> <span class="s2">`/family/{locale}/service/booking/confirm/update`</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">method</span><span class="p">:</span> <span class="s2">"POST"</span><span class="p">,</span>
+  <span class="na">uri</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">hostname</span><span class="p">}${</span><span class="nx">apiPath</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span>
+  <span class="na">body</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">token</span><span class="p">:</span> <span class="nx">token</span><span class="p">,</span>
+    <span class="na">status</span><span class="p">:</span> <span class="s2">"COMPLETED"</span><span class="p">,</span>
+    <span class="na">order_id</span><span class="p">:</span> <span class="s2">"partner-a-20190511-001"</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">foo</span><span class="p">:</span> <span class="s2">"far"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">json</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="nx">request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"RESPONSE"</span><span class="p">,</span> <span class="nx">response</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"ERR"</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+  <span class="p">});</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OK"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"current_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CANCELLED"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Use this api to update appointment. The updatable fields are listed below.</p>
+
+<p><code>POST https://family.sansiri.com/family/{locale}/service/booking/confirm/update</code></p>
+
+<p>Parameter <code>in POST BODY</code></p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>token</td>
+<td>string</td>
+<td>a unique string represent specific service appointment record at Sansiri&#39;s.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>the current of the transaction at service provider site. Allowed values: COMPLETED, CONFIRMED, CANCELLED</td>
+</tr>
+<tr>
+<td>order_id optional</td>
+<td>string</td>
+<td>the transaction id / order represent the transaction / order at service provider site</td>
+</tr>
+<tr>
+<td>data optional</td>
+<td>string</td>
+<td>a json string / object containing any other information not belongs to any other fields</td>
 </tr>
 </tbody></table>
 
