@@ -1,4 +1,4 @@
-## activities/activity_schedules#update
+## activities/activity_schedules#show
 
 ```javascript
 const request = require("request-promise");
@@ -15,19 +15,10 @@ let expTime = Math.floor(Date.now() / 1000) + 60; // expiration + 60 seconds
 let token = jwt.sign({ api_key: apiKey, exp: expTime }, apiSecret);
 
 let options = {
-  method: "PATCH",
+  method: "GET",
   uri: `${hostname}${apiPath}`,
   headers: {
     CMSAuthToken: `Bearer ${token}`
-  },
-  body: {
-    "activity_schedule": {
-		      "start_datetime": "2019-09-19T12:09:05+07:00",
-    	     "end_datetime": "2019-09-20T12:08:43+07:00",
-    	      "description": "description",
-    	       "maximum_seats_per_user": 2
-	}
-  	}
   },
   json: true
 };
@@ -44,7 +35,7 @@ request(options)
 
 ```json
 {
-  "uid": "7PZBMHU16zx5",
+    "uid": "7PZBMHU16zx5",
     "id": 2,
     "start_datetime": "2019-09-19T12:09:05.000+07:00",
     "end_datetime": "2019-09-20T12:08:43.000+07:00",
@@ -60,17 +51,7 @@ Please note that `member_firebase_uid` is from HSA Single Sign On
 
 ### HTTP Request
 
-`PATCH /api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${uid}`
-
-### Request Body
-
-| Parameter           | example                | Description                          |
-| ------------------- | ---------------------- | ------------------------------------ |
-| start_datetime | "2019-09-19T12:09:05.000+07:00"  | Schedule start date/time |
-| end_datetime | "2019-09-20T12:08:43.000+07:00"  | Schedule end date/time |
-| description |  "description" |                   |
-| maximum_seats_per_user  | "2" |   
-
+`GET /api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${uid}`
 
 ### Response
 
@@ -82,4 +63,4 @@ Please note that `member_firebase_uid` is from HSA Single Sign On
 | start_datetime | "2019-09-19T12:09:05.000+07:00"  | Schedule start date/time |
 | end_datetime | "2019-09-20T12:08:43.000+07:00"  | Schedule end date/time |
 | description |  "description" |                   |
-| maximum_seats_per_user  | "2" | Maximum seats per user for this activity|
+| maximum_seats_per_user  | "2" |                   |
