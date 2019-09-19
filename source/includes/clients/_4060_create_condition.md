@@ -1,4 +1,4 @@
-## activities/condition#index
+## activities/condition#create
 
 ```javascript
 const request = require("request-promise");
@@ -14,10 +14,20 @@ let expTime = Math.floor(Date.now() / 1000) + 60; // expiration + 60 seconds
 let token = jwt.sign({ api_key: apiKey, exp: expTime }, apiSecret);
 
 let options = {
-  method: "GET",
+  method: "POST",
   uri: `${hostname}${apiPath}`,
   headers: {
     CMSAuthToken: `Bearer ${token}`
+  },
+  body: {
+    "activity_condition": {
+    "name": "activity_condition 2",
+    "start_datetime": "2019-09-19T12:09:05+07:00",
+    "end_datetime": "2019-09-20T12:08:43+07:00",
+    "activity_volume": 100,
+    "user_type": "sansiri_family"
+    }
+    }
   },
   json: true
 };
@@ -35,18 +45,18 @@ request(options)
 ```json
 [
   {
-      "uid": "sDhinqoIwHHc",
-      "name": "activity_condition 1",
+      "uid": "HhjeK9htqkob",
+      "name": "activity_condition 2",
       "activity_type": null,
       "start_datetime": "2019-09-19T12:09:05.000+07:00",
       "end_datetime": "2019-09-20T12:08:43.000+07:00",
-      "activity_volume": 1000,
+      "activity_volume": 100,
       "user_type": "sansiri_family",
       "status": "active",
-      "created_at": "2019-09-19T12:22:25.146+07:00",
-      "updated_at": "2019-09-19T12:24:50.775+07:00",
+      "created_at": "2019-09-20T01:30:51.864+07:00",
+      "updated_at": "2019-09-20T01:30:51.864+07:00",
       "activity_schedule_id": 2,
-      "available_quota": 999,
+      "available_quota": 100,
       "activity_uid": "NB2sMQWstgQZ"
   }
 ]
@@ -56,7 +66,19 @@ This endpoint retrieves all activites.
 
 #### HTTP Request
 
-`GET /api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions`
+`POST /api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions`
+
+### Request Body
+
+| Parameter           | example                | Description                          |
+| ------------------- | ---------------------- | ------------------------------------ |
+| name | "activity_condition 1" |     Condition Name  |
+| start_datetime          | "2019-09-19T12:09:05.000+07:00" |  Condition start date  |
+| end_datetime   | "2019-09-20T12:08:43.000+07:00"  |   Condition end date |
+| activity_volume    | "1000" | Total availability for this condition              |
+| user_type | "sansiri_family" | Sansiri family user type |
+
+
 
 #### Response
 

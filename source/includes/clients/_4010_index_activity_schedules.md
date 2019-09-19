@@ -1,4 +1,4 @@
-## activity_schedules#index
+## activities/activity_schedules#index
 
 ```javascript
 const request = require("request-promise");
