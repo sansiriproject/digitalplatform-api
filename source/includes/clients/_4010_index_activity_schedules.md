@@ -66,7 +66,6 @@ Remember — a happy api require `activityUid`.
 | Parameter          | example      | Description                       |
 | ------------------ | ------------ | --------------------------------- |
 | uid                | "asdfuirtXX" | URL Safe Base64 String            |   
-| name               | "schedule 1"  | Schedule name |
 | start_datetime | "2019-09-19T12:09:05.000+07:00"  | Schedule start date/time |
 | end_datetime | "2019-09-20T12:08:43.000+07:00"  | Schedule end date/time |
 | description        |  "description" |                   |

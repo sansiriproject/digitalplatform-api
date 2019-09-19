@@ -9,7 +9,7 @@ let apiSecret = "apiSecret";
 let activityUid = "sirnbiusASDIIH";
 
 const hostname = "https://digitalplatform-api.dev.sansiriproject.com";
-const apiPath = `/api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules`;
+const apiPath = `/api/v1/client/:api_key/activities/${activity_uid}/activity_schedules`;
 
 let expTime = Math.floor(Date.now() / 1000) + 60; // expiration + 60 seconds
 let token = jwt.sign({ api_key: apiKey, exp: expTime }, apiSecret);
