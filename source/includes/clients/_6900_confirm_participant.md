@@ -1,4 +1,4 @@
-## activities/participants#attend
+## activities/participants#confirm
 
 ```javascript
 const request = require("request-promise");
@@ -10,7 +10,7 @@ let activityUid = "sirnbiusASDIIH";
 let participantUid = "cPsF-wBftDcs";
 
 const hostname = "https://digitalplatform-api.dev.sansiriproject.com";
-const apiPath = `/api/v1/client/${apiKey}/activities/${activityUid}/participants/${participantUid}/attend`;
+const apiPath = `/api/v1/client/${apiKey}/activities/${activityUid}/activity_schedules/${activity_schedule_uid}/participants/${uid}/confirm`;
 
 let expTime = Math.floor(Date.now() / 1000) + 60; // expiration + 60 seconds
 let token = jwt.sign({ api_key: apiKey, exp: expTime }, apiSecret);
@@ -62,7 +62,7 @@ request(options)
 
 This endpoint update participant `participantUid` status to `attended`.
 
-> Only `attending` can be transitioned to `attended`. `canceled` cannot be toggle to attended to prevent over capacity booking.
+> Only `attending` can be transitioned to `confirmed`, `attended`. `canceled` cannot be toggle to attended to prevent over capacity booking.
 
 API validates that `participantUid` belongs to `activityUid`.
 
@@ -77,4 +77,4 @@ API validates that `participantUid` belongs to `activityUid`.
 | Parameter | example        | Description            |
 | --------- | -------------- | ---------------------- |
 | uid       | "cPsF-wBftDcs" | URL Safe Base64 String |
-| status    | "attended"     |                        |
+| status    | "confirmed"     |                        |

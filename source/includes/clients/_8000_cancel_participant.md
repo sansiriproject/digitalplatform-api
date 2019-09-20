@@ -10,7 +10,7 @@ let activityUid = "sirnbiusASDIIH";
 let participantUid = "cPsF-wBftDcs";
 
 const hostname = "https://digitalplatform-api.dev.sansiriproject.com";
-const apiPath = `/api/v1/client/${apiKey}/activities/${activityUid}/participants/${participantUid}/cancel`;
+const apiPath = `/api/v1/client/${apiKey}/activities/${activityUid}/activity_schedules/${activity_schedule_uid}/participants/${uid}/cancel`;
 
 let expTime = Math.floor(Date.now() / 1000) + 60; // expiration + 60 seconds
 let token = jwt.sign({ api_key: apiKey, exp: expTime }, apiSecret);
@@ -68,7 +68,7 @@ API validates that `participantUid` belongs to `activityUid`.
 
 ### HTTP Request
 
-`PATCH /api/v1/client/${apiKey}/activities/${activityUid}/participants/${participantUid}/cancel`
+`PATCH /api/v1/client/${apiKey}/activities/${activityUid}/activity_schedules/${activity_schedule_uid}/participants/${uid}/cancel`
 
 ### Response
 
