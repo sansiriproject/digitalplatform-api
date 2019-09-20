@@ -1,4 +1,4 @@
-## activities/condition#index
+## activities/condition#show
 
 ```javascript
 const request = require("request-promise");
@@ -8,7 +8,8 @@ let apiKey = "apiKey";
 let apiSecret = "apiSecret";
 
 const hostname = "https://digitalplatform-api.dev.sansiriproject.com";
-const apiPath = `/api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions`;
+const apiPath = `/api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions/${uid}`;
+
 
 let expTime = Math.floor(Date.now() / 1000) + 60; // expiration + 60 seconds
 let token = jwt.sign({ api_key: apiKey, exp: expTime }, apiSecret);
@@ -42,9 +43,9 @@ request(options)
       "end_datetime": "2019-09-20T12:08:43.000+07:00",
       "activity_volume": 1000,
       "user_type": "sansiri_family",
-      "status": "active",
+      "status": "inactive",
       "created_at": "2019-09-19T12:22:25.146+07:00",
-      "updated_at": "2019-09-19T12:24:50.775+07:00",
+      "updated_at": "2019-09-19T21:02:04.322+07:00",
       "activity_schedule_id": 2,
       "available_quota": 999,
       "activity_uid": "NB2sMQWstgQZ"
@@ -56,7 +57,7 @@ This endpoint retrieves all activites.
 
 #### HTTP Request
 
-`GET /api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions`
+`GET /api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions/${uid}`
 
 #### Response
 

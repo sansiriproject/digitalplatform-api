@@ -1,4 +1,4 @@
-## activities/condition#create
+## activities/condition#update
 
 ```javascript
 const request = require("request-promise");
@@ -8,7 +8,7 @@ let apiKey = "apiKey";
 let apiSecret = "apiSecret";
 
 const hostname = "https://digitalplatform-api.dev.sansiriproject.com";
-const apiPath = `/api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions`;
+const apiPath = `/api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions/${uid}`;
 
 let expTime = Math.floor(Date.now() / 1000) + 60; // expiration + 60 seconds
 let token = jwt.sign({ api_key: apiKey, exp: expTime }, apiSecret);
@@ -20,14 +20,14 @@ let options = {
     CMSAuthToken: `Bearer ${token}`
   },
   body: {
-    "activity_condition": {
-    "name": "activity_condition 2",
-    "start_datetime": "2019-09-19T12:09:05+07:00",
-    "end_datetime": "2019-09-20T12:08:43+07:00",
-    "activity_volume": 100,
-    "user_type": "sansiri_family"
-    }
-    }
+	"activity_condition": {
+    	"name": "activity_condition 1",
+    	"start_datetime": "2019-09-19T12:09:05+07:00",
+    	"end_datetime": "2019-09-20T12:08:43+07:00",
+    	"activity_volume": 1000,
+    	"user_type": "sansiri_family"
+	        }
+        }
   },
   json: true
 };
@@ -45,18 +45,18 @@ request(options)
 ```json
 [
   {
-      "uid": "HhjeK9htqkob",
-      "name": "activity_condition 2",
+      "activity_schedule_id": 2,
+      "uid": "sDhinqoIwHHc",
+      "name": "activity_condition 1",
       "activity_type": null,
       "start_datetime": "2019-09-19T12:09:05.000+07:00",
       "end_datetime": "2019-09-20T12:08:43.000+07:00",
-      "activity_volume": 100,
+      "activity_volume": 1000,
       "user_type": "sansiri_family",
-      "status": "active",
-      "created_at": "2019-09-20T01:30:51.864+07:00",
-      "updated_at": "2019-09-20T01:30:51.864+07:00",
-      "activity_schedule_id": 2,
-      "available_quota": 100,
+      "status": "inactive",
+      "created_at": "2019-09-19T12:22:25.146+07:00",
+      "updated_at": "2019-09-19T21:02:04.322+07:00",
+      "available_quota": 999,
       "activity_uid": "NB2sMQWstgQZ"
   }
 ]
@@ -66,7 +66,7 @@ This endpoint retrieves all activites.
 
 #### HTTP Request
 
-`POST /api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions`
+`POST /api/v1/client/${apiKey}/activities/${activity_uid}/activity_schedules/${activity_schedule_uid}/activity_conditions/${uid}`
 
 ### Request Body
 
