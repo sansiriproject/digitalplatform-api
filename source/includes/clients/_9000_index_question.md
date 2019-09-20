@@ -48,7 +48,7 @@ This endpoint retrieves all activites.
 
 #### HTTP Request
 
-`GET /api/v1/client/${apiKey}/activities/${activity_uid}/questions``
+`GET /api/v1/client/${apiKey}/activities/${activity_uid}/questions`
 
 #### Response
 

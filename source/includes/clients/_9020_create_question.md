@@ -1,4 +1,5 @@
-## activities/question#show
+## activities/question#create
+
 ```javascript
 const request = require("request-promise");
 const jwt = require("jsonwebtoken");
@@ -7,16 +8,26 @@ let apiKey = "apiKey";
 let apiSecret = "apiSecret";
 
 const hostname = "https://digitalplatform-api.dev.sansiriproject.com";
-const apiPath = `/api/v1/client/${apiKey}/activities/${activity_uid}/questions/${uid}`;
+const apiPath = `/api/v1/client/${apiKey}/activities/${activity_uid}/questions`;
 
 let expTime = Math.floor(Date.now() / 1000) + 60; // expiration + 60 seconds
 let token = jwt.sign({ api_key: apiKey, exp: expTime }, apiSecret);
 
 let options = {
-  method: "GET",
+  method: "POST",
   uri: `${hostname}${apiPath}`,
   headers: {
     CMSAuthToken: `Bearer ${token}`
+  },
+  body: {
+	   "question": {
+		      "question_text": "Hello",
+    	    "question_type": "text",
+    	    "is_multiple": false,
+    	    "sorting_index": 1.0
+	}
+}
+
   },
   json: true
 };
@@ -34,11 +45,11 @@ request(options)
 ```json
 [
   {
-            "uid": "lG4oYTZ6WFuE",
-            "question_text": "q2",
-            "status": "active",
-            "question_type": "text",
-            "is_multiple": false,
+    "uid": "fwJ7QGg2-fr1",
+    "question_text": "Hello",
+    "status": "active",
+    "question_type": "text",
+    "is_multiple": false,
   }
 ]
 ```
@@ -47,7 +58,19 @@ This endpoint retrieves all activites.
 
 #### HTTP Request
 
-`GET /api/v1/client/${apiKey}/activities/${activity_uid}/questions/${uid}`
+`POST /api/v1/client/${apiKey}/activities/${activity_uid}/questions`
+
+### Request Body
+
+| Parameter           | example                | Description                          |
+| ------------------- | ---------------------- | ------------------------------------ |
+| uid  | "asdfuirtXX" | URL Safe Base64 String |
+| question_text | "q2" | question text |
+| question_type   | "text"  |   checkbox, radio, text |
+| is_multiple    | false | true, false |
+| sorting_index          | 1.0 |  decimal  |
+
+
 
 #### Response
 
