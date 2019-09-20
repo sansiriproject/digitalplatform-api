@@ -62,7 +62,7 @@ request(options)
 
 This endpoint update participant `participantUid` status to `attended`.
 
-> Only `attending` can be transitioned to `comfirmed`,`attended`. `canceled` cannot be toggle to attended to prevent over capacity booking.
+> Only `attending` can be transitioned to `attended`. `canceled` cannot be toggle to attended to prevent over capacity booking.
 
 API validates that `participantUid` belongs to `activityUid`.
 
