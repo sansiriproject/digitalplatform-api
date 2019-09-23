@@ -10,12 +10,12 @@ toc_footers:
 includes:
   - clients/1000_introduction
   - clients/2000_authentication
-  - clients/3000_activities
+  - clients/3000_index_activities
   - clients/3010_create_activities
   - clients/3020_update_activities
   - clients/3030_activate_activities
   - clients/3040_inactivate_activities
-  - clients/4000_activity
+  - clients/4000_show_activity
   - clients/4010_index_activity_schedules
   - clients/4020_create_activity_schedules
   - clients/4030_update_activity_schedules
@@ -26,7 +26,7 @@ includes:
   - clients/4080_show_condition
   - clients/4090_activate_condition
   - clients/4100_inactivate_condition
-  - clients/5000_participants
+  - clients/5000_index_participants
   - clients/5010_show_participants
   - clients/6000_create_participant
   - clients/6900_confirm_participant
