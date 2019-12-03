@@ -28,6 +28,8 @@ Example Response
   "first_name": "first_name",
   "last_name": "last_name",
   "phone_number": "phone_number",
+  "email": "email",
+  "date_of_birth": "date_of_birth",
   "project_id": "project_id",
   "project_name": "project_name",
   "model_code": "model_code",
